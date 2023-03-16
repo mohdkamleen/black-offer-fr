@@ -10,7 +10,7 @@ export default function () {
     const navigate = useNavigate()
 
     useEffect(() => {
-        axios.get('/monitor/get-visitor')
+        axios.get('/')
             .then((res) => setvisitor(res?.data))
             .catch((error) => {
                 console.log('fetch visitor failed', error);
@@ -19,8 +19,8 @@ export default function () {
 
     const configVisitor = {
         data: visitor,
-        xField: "date",
-        yField: "visitors",
+        xField: "intensity",
+        yField: "end_year",
         xAxis: {
             label: {
                 autoHide: true,
@@ -32,7 +32,7 @@ export default function () {
     return (
         <div style={{ padding: "10px 5%" }}>
             <div style={{ display: "flex", justifyContent: "space-around" }}>
-                <Button loading={!visitor.length > 0}> {visitor.length > 0 && visitor?.map(e => e.visitors).reduce((i, j) => i + j)} Visitors</Button>
+                <Button loading={!visitor.length > 0}> {visitor.length > 0 && visitor?.length} Visitors</Button>
                 <Button onClick={() => navigate("appoinments")}> 20 Appoinments </Button>
                 <Button onClick={() => navigate("blogs")}> 70 Blogs</Button>
                 <Button onClick={() => navigate("subscriber")}> 300 Subscribers </Button>

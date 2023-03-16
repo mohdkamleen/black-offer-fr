@@ -52,7 +52,7 @@ export default function () {
         collapsed={collapsed}
         onCollapse={(value) => setCollapsed(value)} >
 
-        {!collapsed ? <div className='logo'>Mindikko<font color="#fdae5c">.</font></div> : <div className='logo'>M<font color="#fdae5c">.</font></div>}
+        {!collapsed ? <div className='logo'>BlackOffer</div> : <div className='logo'>BO</div>}
 
         <Menu
           theme="dark"
