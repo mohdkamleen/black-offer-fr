@@ -3,22 +3,14 @@ import { Column, Line } from "@ant-design/plots";
 import { Button } from "antd";
 import axios from '../../axios';
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 export default function () {
-
-    const [visitor, setvisitor] = useState([]);
+    const { loading, data } = useSelector(state => state.data)
     const navigate = useNavigate()
 
-    useEffect(() => {
-        axios.get('/')
-            .then((res) => setvisitor(res?.data))
-            .catch((error) => {
-                console.log('fetch visitor failed', error);
-            });
-    }, []);
-
-    const configVisitor = {
-        data: visitor,
+    const configData = {
+        data : data || [],
         xField: "intensity",
         yField: "end_year",
         xAxis: {
@@ -32,15 +24,15 @@ export default function () {
     return (
         <div style={{ padding: "10px 5%" }}>
             <div style={{ display: "flex", justifyContent: "space-around" }}>
-                <Button loading={!visitor.length > 0}> {visitor.length > 0 && visitor?.length} Visitors</Button>
+                <Button> 10000 Visitors</Button>
                 <Button onClick={() => navigate("appoinments")}> 20 Appoinments </Button>
                 <Button onClick={() => navigate("blogs")}> 70 Blogs</Button>
                 <Button onClick={() => navigate("subscriber")}> 300 Subscribers </Button>
-            </div> <br />
+            </div> <br /><br />
+
 
             <big>Visitors </big> <br /><br />
-            <Line autoFit {...configVisitor} /> <br /><br />
-
+            <Column autoFit {...configData} />
         </div>
     )
 }

@@ -7,9 +7,18 @@ import Admin from './pages/admin';
 import Customer from './pages/customer';
 import Subscriber from './pages/subscriber';
 import Profile from './pages/profile';
+import { useDispatch } from 'react-redux';
+import { FetchData } from './redux/slice/data';
+import { useEffect } from 'react';
 
 
 function App() {
+
+  const dispatch = useDispatch()
+  useEffect(() => {
+    dispatch(FetchData())
+  }, [])
+  
   return (
     <>
       <BrowserRouter>
