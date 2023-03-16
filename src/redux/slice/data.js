@@ -1,6 +1,6 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';  
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';   
 import axios from '../../axios/index';
-
+ 
 export const authenticateUser = createAsyncThunk(
     'auth/authenticateUser',
     async (payload, { rejectWithValue }) => {

@@ -1,4 +1,4 @@
-import { BellOutlined, CaretDownOutlined, FileAddOutlined, FileOutlined, GlobalOutlined, HomeOutlined, LineChartOutlined, ProfileOutlined, TeamOutlined, UserOutlined } from '@ant-design/icons';
+import { BellOutlined, CaretDownOutlined, DatabaseOutlined, FileAddOutlined, FileOutlined, GlobalOutlined, HomeOutlined, LineChartOutlined, ProfileOutlined, TeamOutlined, UserOutlined } from '@ant-design/icons';
 import { Avatar, Badge, Layout, Menu, theme } from 'antd';
 import { useState } from 'react';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
@@ -13,8 +13,7 @@ function getItem(label, key, icon, children) {
 }
 const items = [
   getItem('Home', "/", <HomeOutlined />),
-  getItem('Profile', 'profile', <ProfileOutlined />),
-  getItem('Appoinments', 'appoinments', <FileAddOutlined />),
+  getItem('Data', 'data', <DatabaseOutlined />), 
   getItem('Blogs', 'blogs', <GlobalOutlined />),
   getItem('Users', 'users', <TeamOutlined />, [
     getItem('Admin', 'admin'),
@@ -98,7 +97,7 @@ export default function () {
             textAlign: 'center',
           }}
         >
-          &copy; <font face="vertana">Mindikko</font><font color="#fdae5c">.</font> {(new Date().getFullYear())} All Right Reserved.
+          &copy; BlackOffer {(new Date().getFullYear())} All Right Reserved.
         </Footer>
       </Layout>
     </Layout>
