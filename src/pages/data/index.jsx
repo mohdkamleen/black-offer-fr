@@ -18,24 +18,24 @@ export default function () {
             title: 'Intensity',
             dataIndex: 'intensity',
             sorter: {
-              compare: (a, b) => a.intensity - b.intensity,
-              multiple: 2,
+                compare: (a, b) => a.intensity - b.intensity,
+                multiple: 2,
             },
         },
         {
             title: 'likelihood',
             dataIndex: 'likelihood',
             sorter: {
-              compare: (a, b) => a.likelihood - b.likelihood,
-              multiple: 1,
+                compare: (a, b) => a.likelihood - b.likelihood,
+                multiple: 1,
             },
         },
         {
             title: 'Relevance',
             dataIndex: 'relevance',
             sorter: {
-              compare: (a, b) => a.relevance - b.relevance,
-              multiple: 1,
+                compare: (a, b) => a.relevance - b.relevance,
+                multiple: 1,
             },
         },
         {
@@ -56,16 +56,16 @@ export default function () {
             title: 'Start Year',
             dataIndex: `start_year`,
             sorter: {
-              compare: (a, b) => a.start_year - b.start_year,
-              multiple: 1,
+                compare: (a, b) => a.start_year - b.start_year,
+                multiple: 1,
             },
         },
         {
             title: 'End Year',
             dataIndex: `end_year`,
             sorter: {
-              compare: (a, b) => a.end_year - b.end_year,
-              multiple: 1,
+                compare: (a, b) => a.end_year - b.end_year,
+                multiple: 1,
             },
         },
         {
@@ -91,44 +91,50 @@ export default function () {
     return (
         <>
             <div style={{ display: "flex", justifyContent: "space-between", flexWrap: "wrap", gap: "20px" }}>
-                <Button> {data?.length} Data </Button>
-                <Button type='primary' onClick={() => setFilterDrawer(true)}> Filter <FilterOutlined /></Button>
+                <big> {data?.length || 0} Data </big>
+                <div>
+                    <Button> Add New </Button> &ensp;
+                    <Button type='primary' onClick={() => setFilterDrawer(true)}><FilterOutlined /></Button>
+                </div>
             </div> <br />
             <Table
+                loading={loading}
                 dataSource={data}
-                columns={columns} 
+                columns={columns}
             />
 
             {/* filter Drawer  */}
 
             <Drawer closeIcon title="Filter Data" placement="right" onClose={() => setFilterDrawer(false)} open={filterDrawer}>
                 <Select style={{ width: "150px" }} placeholder="Start year">
-                    <option value="1"></option>
+                    {data && [...new Set(data.map(e => e.start_year))]?.filter(e => e !== null).map((e, i) => <option key={i} value={e} />)}
                 </Select> &ensp;
                 <Select style={{ width: "150px" }} placeholder="End year">
-                    <option value="1"></option>
+                    {data && [...new Set(data.map(e => e.end_year))]?.filter(e => e !== null).map((e, i) => <option key={i} value={e} />)}
                 </Select> <br /><br />
 
                 <Select style={{ width: "150px" }} placeholder="Topic">
-                    <option value="1"></option>
+                    {data && [...new Set(data.map(e => e.topic))]?.filter(e => e !== "").map((e, i) => <option key={i} value={e} />)}
                 </Select> &ensp;
                 <Select style={{ width: "150px" }} placeholder="Sector">
-                    <option value="1"></option>
+                    {data && [...new Set(data.map(e => e.sector))]?.filter(e => e !== "").map((e, i) => <option key={i} value={e} />)}
                 </Select><br /><br />
 
                 <Select style={{ width: "150px" }} placeholder="Region">
-                    <option value="1"></option>
+                    {data && [...new Set(data.map(e => e.region))]?.filter(e => e !== "").map((e, i) => <option key={i} value={e} />)}
                 </Select> &ensp;
                 <Select style={{ width: "150px" }} placeholder="Pest">
-                    <option value="1"></option>
+                    {data && [...new Set(data.map(e => e.pestle))]?.filter(e => e !== "").map((e, i) => <option key={i} value={e} />)}
                 </Select><br /><br />
 
                 <Select style={{ width: "150px" }} placeholder="Country">
-                    <option value="1"></option>
+                    {data && [...new Set(data.map(e => e.country))]?.filter(e => e !== "").map((e, i) => <option key={i} value={e} />)}
                 </Select> &ensp;
-                <Select style={{ width: "150px" }} placeholder="Region">
-                    <option value="1"></option>
-                </Select>
+                <Select style={{ width: "150px" }} placeholder="Insight">
+                    {data && [...new Set(data.map(e => e.insight))]?.filter(e => e !== "").map((e, i) => <option key={i} value={e} />)}
+                </Select> <br /><br /><br />
+
+                <Button onClick={() => setFilterDrawer(false)} type='primary'> Close Filter </Button>
             </Drawer>
         </>
     );
