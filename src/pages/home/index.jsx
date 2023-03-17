@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Column, Line } from "@ant-design/plots";
-import { Button, DatePicker, Select } from "antd";
-import axios from '../../axios';
+import { Button, DatePicker, Select } from "antd"; 
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
@@ -11,7 +10,7 @@ export default function () {
 
     const configData = {
         data: data || [],
-        xField: "intensity",
+        xField: "topic",
         yField: "end_year",
         xAxis: {
             label: {
@@ -22,8 +21,7 @@ export default function () {
         slider: {
             start: 0.1,
             end: 0.2,
-        },
-        smooth: true,
+        }
     };
 
     // const configData = {
@@ -46,7 +44,7 @@ export default function () {
         <div style={{ padding: "10px 3%" }}>
             <div style={{ display: "flex", justifyContent: "space-around" }}>
                 <Button size="large"> 1000 Visitors</Button>
-                <Button size="large"> {[...new Set(data.map(e => e.country))].length} Country</Button>
+                <Button size="large"> {data && [...new Set(data.map(e => e.country))].length} Country</Button>
                 <Button size="large"> 240 Users </Button>
                 <Button size="large"> 300 Subscribers </Button>
             </div> <br /><br />
@@ -68,7 +66,7 @@ export default function () {
                     <big>Visitors </big>
                     <DatePicker />
                 </div> <br />
-                {/* <Column {...configData} /> */}
+                <Column {...configData} />
             </div><br /><br />
 
         </div>
