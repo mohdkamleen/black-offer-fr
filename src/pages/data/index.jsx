@@ -1,13 +1,13 @@
 import { DeleteOutlined, EditOutlined, FilterOutlined, LinkOutlined } from '@ant-design/icons';
 import { Table, Button, Select, Popconfirm, Drawer, Tooltip } from 'antd';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 
 
 export default function () {
-
-    const { loading, data } = useSelector(state => state.data)
+    var { loading, data } = useSelector(state => state.data)
     const [filterDrawer, setFilterDrawer] = useState(false)
+    const [filter, setFilter] = useState()
 
     const columns = [
         {
@@ -97,40 +97,49 @@ export default function () {
                     <Button type='primary' onClick={() => setFilterDrawer(true)}><FilterOutlined /></Button>
                 </div>
             </div> <br />
+
             <Table
                 loading={loading}
-                dataSource={data}
+                dataSource={filter ? data.filter(e =>
+                    e.start_year === filter?.start_year
+                    || e.end_year === filter?.end_year
+                    || e.topic === filter?.topic
+                    || e.sector === filter?.sector
+                    || e.region === filter?.region
+                    || e.pestle === filter?.pestle
+                    || e.insight === filter?.insight
+                    || e.country === filter?.country
+                ) : data}
                 columns={columns}
             />
 
             {/* filter Drawer  */}
-
             <Drawer closeIcon title="Filter Data" placement="right" onClose={() => setFilterDrawer(false)} open={filterDrawer}>
-                <Select style={{ width: "150px" }} placeholder="Start year">
+                <Select style={{ width: "150px" }} placeholder="Start year" onChange={(e) => setFilter({ ...filter, start_year: e })}>
                     {data && [...new Set(data.map(e => e.start_year))]?.filter(e => e !== null).map((e, i) => <option key={i} value={e} />)}
                 </Select> &ensp;
-                <Select style={{ width: "150px" }} placeholder="End year">
+                <Select style={{ width: "150px" }} placeholder="End year"  onChange={(e) => setFilter({ ...filter, end_year: e })}>
                     {data && [...new Set(data.map(e => e.end_year))]?.filter(e => e !== null).map((e, i) => <option key={i} value={e} />)}
                 </Select> <br /><br />
 
-                <Select style={{ width: "150px" }} placeholder="Topic">
+                <Select style={{ width: "150px" }} placeholder="Topic"  onChange={(e) => setFilter({ ...filter, topic: e })}>
                     {data && [...new Set(data.map(e => e.topic))]?.filter(e => e !== "").map((e, i) => <option key={i} value={e} />)}
                 </Select> &ensp;
-                <Select style={{ width: "150px" }} placeholder="Sector">
+                <Select style={{ width: "150px" }} placeholder="Sector"  onChange={(e) => setFilter({ ...filter, sector: e })}>
                     {data && [...new Set(data.map(e => e.sector))]?.filter(e => e !== "").map((e, i) => <option key={i} value={e} />)}
                 </Select><br /><br />
 
-                <Select style={{ width: "150px" }} placeholder="Region">
+                <Select style={{ width: "150px" }} placeholder="Region"  onChange={(e) => setFilter({ ...filter, region: e })}>
                     {data && [...new Set(data.map(e => e.region))]?.filter(e => e !== "").map((e, i) => <option key={i} value={e} />)}
                 </Select> &ensp;
-                <Select style={{ width: "150px" }} placeholder="Pest">
+                <Select style={{ width: "150px" }} placeholder="Pest"  onChange={(e) => setFilter({ ...filter, pestle: e })}>
                     {data && [...new Set(data.map(e => e.pestle))]?.filter(e => e !== "").map((e, i) => <option key={i} value={e} />)}
                 </Select><br /><br />
 
-                <Select style={{ width: "150px" }} placeholder="Country">
+                <Select style={{ width: "150px" }} placeholder="Country" onChange={(e) => setFilter({ ...filter, country: e })}>
                     {data && [...new Set(data.map(e => e.country))]?.filter(e => e !== "").map((e, i) => <option key={i} value={e} />)}
                 </Select> &ensp;
-                <Select style={{ width: "150px" }} placeholder="Insight">
+                <Select style={{ width: "150px" }} placeholder="Insight"  onChange={(e) => setFilter({ ...filter, insight: e })}>
                     {data && [...new Set(data.map(e => e.insight))]?.filter(e => e !== "").map((e, i) => <option key={i} value={e} />)}
                 </Select> <br /><br /><br />
 
