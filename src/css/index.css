@@ -24,3 +24,26 @@
     top: 100%;
     font-size: 12px;
   }
+
+  .chart-flex{
+    display: flex;
+    justify-content: space-between;
+    gap:35px;   
+  }
+
+  .chart-flex .chart{
+    flex: 1;
+    border: 1px solid lightgray;
+    padding: 50px;
+    border-radius: 15px;
+    width: 45%;
+  }
+
+  @media (max-width:1000px){
+  .chart-flex{
+    flex-direction: column;
+  }
+  .chart-flex .chart{ 
+    width: 100%;
+  }
+  }
