@@ -143,7 +143,7 @@ export default function () {
                     {data && [...new Set(data.map(e => e.insight))]?.filter(e => e !== "").map((e, i) => <option key={i} value={e} />)}
                 </Select> <br /><br /><br />
 
-                <Button onClick={() => setFilterDrawer(false)} type='primary'> Close Filter </Button>
+                <Button onClick={() => setFilter()} type='primary'> Clear Filter </Button>
             </Drawer>
         </>
     );
