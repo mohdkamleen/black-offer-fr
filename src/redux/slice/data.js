@@ -38,7 +38,7 @@ export const dataSlice = createSlice({
             })
             .addCase(authenticateUser.rejected, (state, action) => {
                 state.loading = false;
-                state.user = null;
+                state.data = null;
             });
     },
 });
